@@ -1,5 +1,5 @@
 
-const { signToken } = require('./../utils/auth');
+const { signToken } = require('../utils/auth');
 const { AuthenticationError } = require('apollo-server-express');
 const bcrypt = require("bcrypt");
 

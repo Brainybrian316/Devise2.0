@@ -17,10 +17,9 @@ async function  StartApolloServer() {
 });
 
 await server.start();
- server.applyMiddleware({ app });
-
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
+server.applyMiddleware({ app, path: '/' });
 
 // Serve up static assets
 app.use('/images', express.static(path.join(__dirname, '../client/images')));
