@@ -1,7 +1,6 @@
 
-const { signToken } = require('../../utils/auth');
+const { signToken } = require('./../utils/auth');
 const { AuthenticationError } = require('apollo-server-express');
-require("dotenv").config();
 const bcrypt = require("bcrypt");
 
 const { User, DevProjects, UserProjects, Subscriptions } = require('../models');

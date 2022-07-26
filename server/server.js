@@ -1,35 +1,30 @@
-
-const  { ApolloServerPluginDrainHttpServer } = require('apollo-server-core');
-const { InMemoryCache } = require('@apollo/client');
 const express = require('express');
-const http = require('http');
 const { ApolloServer } = require('apollo-server-express');
 const path = require('path');
-const { resolvers, typeDefs } = require('./schemas');
-const { authMiddleware } = require('../utils/auth');
+const { typeDefs, resolvers } = require('./schemas');
+const { authMiddleware } = require('./utils/auth');
 const db = require('./config/connection');
-require("dotenv").config();
+require('dotenv').config();
 
+const PORT = process.env.PORT || 3001;
 
-const PORT = process.env.PORT || 4000;
-
-async function startApolloServer() {
+async function  StartApolloServer() {
   const app = express();
-  const httpServer = http.createServer(app);
-
-  const server = new ApolloServer({
-    typeDefs,
-    resolvers,
-    csrfPrevention: true,
-    cache: new InMemoryCache(),
-    plugins: [ApolloServerPluginDrainHttpServer({ httpServer })],
-    context: authMiddleware
-  });
+  const server =  new ApolloServer({
+  typeDefs,
+  resolvers,
+  context: authMiddleware
+});
 
 await server.start();
-app.use(express.urlencoded({ extended: true }));
+ server.applyMiddleware({ app });
+
+app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
-server.applyMiddleware({ app, path: '/' });
+
+// Serve up static assets
+app.use('/images', express.static(path.join(__dirname, '../client/images')));
+
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, '../client/build')));
 }
@@ -47,4 +42,4 @@ db.once('open', () => {
 );
 }
 
-startApolloServer();
+StartApolloServer();
