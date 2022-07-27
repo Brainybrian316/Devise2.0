@@ -1,5 +1,5 @@
 
-import './App.css';
+
 
 function App() {
   return (
@@ -8,7 +8,6 @@ function App() {
         Hello World
       </h1>
       
-      <i className="bi-alarm"></i>
      
     </div>
   );
