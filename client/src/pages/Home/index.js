@@ -1,4 +1,4 @@
-import { Image } from 'react-bootstrap';
+import { Container, Image } from 'react-bootstrap';
 import './Home.css';
 
 
@@ -6,7 +6,13 @@ export default function Home() {
 
   return (
     <>
-    <Image src={require('../../assets/images/Hero2.png')} fluid id='hero' />
+    <header className="page-header">
+      
+    </header>
+
+    <Container>
+      <h1>Welcome to the Home Page</h1>
+    </Container>
    
     </>
   );

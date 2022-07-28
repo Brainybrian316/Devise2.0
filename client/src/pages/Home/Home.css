@@ -2,3 +2,14 @@
 #hero {
   width: 100%;
 }
+
+
+gradient {
+  background: rgb(0, 97, 242);
+  background: linear-gradient(
+    135deg,
+    rgba(0, 97, 242, 1) 0%,
+    rgba(105, 0, 199, 1) 100%
+  )
+
+}
